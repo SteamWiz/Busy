@@ -1,4 +1,3 @@
 {
-    "python.defaultInterpreterPath": "./.venv/bin/python",
-    "gitlab.duoCodeSuggestions.enabled": false
+    "python.defaultInterpreterPath": "./.venv/bin/python"
 }

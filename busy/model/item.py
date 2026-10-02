@@ -209,7 +209,7 @@ class Item:
 
     @property
     def checkbox(self):
-        """GitLab-style Markdown checkbox"""
+        """GitHub-style Markdown task-list checkbox"""
         checked = 'x' if self.state == 'done' else ' '
         return f"- [{checked}]"
 

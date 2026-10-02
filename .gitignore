@@ -22,6 +22,3 @@ sandbox/working/
 
 # Emacs temp files
 .#*
-
-# An experiment in caching for GitLab data
-.glie

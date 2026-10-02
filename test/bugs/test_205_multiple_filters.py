@@ -26,7 +26,7 @@ class TestBug205MultipleFilters(BusyTestCase):
         grep, because grep: is OR'd with tag criteria in the same group."""
         a = self._make_app(
             'Draft contract #insurance #internal #main',
-            'Iterate on GitLab renewal #admin #internal #main',
+            'Iterate on license renewal #admin #internal #main',
             'Unrelated task #other',
         )
         c = ViewCommand(a, filter=['internal+main', 'grep:insurance'])
@@ -35,13 +35,13 @@ class TestBug205MultipleFilters(BusyTestCase):
         lines = n.splitlines()
         self.assertEqual(len(lines), 2)
         self.assertIn('Draft contract', lines)
-        self.assertIn('Iterate on GitLab renewal', lines)
+        self.assertIn('Iterate on license renewal', lines)
 
     def test_combined_tag_and_grep_includes_grep_only_match(self):
         """Items matching grep but not the tag filter should also appear."""
         a = self._make_app(
             'Draft contract #insurance #internal #main',
-            'Iterate on GitLab renewal #admin #internal #main',
+            'Iterate on license renewal #admin #internal #main',
             'Insurance policy notes #other',
         )
         c = ViewCommand(a, filter=['internal+main', 'grep:insurance'])

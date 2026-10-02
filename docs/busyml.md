@@ -24,7 +24,7 @@ All words without markers that appear before the repeat marker are considered th
 - The unique identifier is A003KP
 - The base is "Check new Mac prices"
 - Tags are `shopping` and `weekend`
-- One data item `i88` (might refer to a GitLab issue, for example)
+- One data item `i88` (might refer to an issue tracker item, for example)
 - 14 minutes of elapsed time
 - Related url is the Apple store
 - When done, the task will repeat next Saturday
