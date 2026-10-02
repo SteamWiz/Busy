@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clear test data",
+            "command": "rm",
+            "args": ["-R", "data_temp"],
+            "type": "shell"
+        },
+        {
+            "label": "copy test data",
+            "command": "cp",
+            "args": ["-R", "data_perm", "data_temp"],
+            "type": "shell",
+            "dependsOn": "clear test data"
+        }
+    ]
+}

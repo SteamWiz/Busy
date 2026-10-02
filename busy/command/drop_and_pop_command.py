@@ -1,0 +1,66 @@
+from random import choice
+
+from busy.command import QueueCommand
+
+
+class DropCommand(QueueCommand):
+    """Move items to the end of the todo collection of a queue"""
+
+    name = 'drop'
+    default_filter = [1]
+    is_writer = True
+
+    @QueueCommand.wrap
+    def execute(self):
+        if self.selected_indices:
+            lolist, hilist = self.collection.split(self.selected_indices)
+            self.collection.data = hilist + lolist
+        self.set_next_item_status()
+
+
+class PopCommand(QueueCommand):
+    """Move items to the beginning of the collection"""
+
+    name = 'pop'
+    default_filter = ['-']
+    is_writer = True
+
+    @QueueCommand.wrap
+    def execute(self):
+        if self.selected_indices:
+            hilist, lolist = self.collection.split(self.selected_indices)
+            self.collection.data = hilist + lolist
+        self.set_next_item_status()
+
+
+class PickCommand(QueueCommand):
+    """Move a random item to the beginning of the collection"""
+
+    name = 'pick'
+    default_filter = ['1-']
+    is_writer = True
+
+    @QueueCommand.wrap
+    def execute(self):
+        if self.selected_indices:
+            index = choice(self.selected_indices)
+            item = self.collection[index]
+            hilist, lolist = self.collection.split([index])
+            self.collection.data = hilist + lolist
+        self.set_next_item_status()
+
+
+class Pop1Command(QueueCommand):
+    """Move the topmost matching item to the beginning of the collection"""
+
+    name = 'pop1'
+    default_filter = ['1-']
+    is_writer = True
+
+    @QueueCommand.wrap
+    def execute(self):
+        if self.selected_indices:
+            index = self.selected_indices[0]
+            hilist, lolist = self.collection.split([index])
+            self.collection.data = hilist + lolist
+        self.set_next_item_status()

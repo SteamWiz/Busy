@@ -1,0 +1,28 @@
+# Dyngle tools for developers (think of it like Make). Shared operations live
+# in the .conf submodule (https://github.com/SteamWiz/Conf).
+
+dyngle:
+
+  imports:
+    - .conf/python.dyngle.yml
+    - ~/.dyngle.yml
+
+  # Repo-specific settings. coverage-target should match coverage-min in
+  # .github/workflows/ci.yml.
+
+  constants:
+    coverage-target: '96'
+    python-version: '3.13'
+
+  operations:
+
+    sandbox:
+      - rm -rf ./sandbox/working
+      - cp -r ./sandbox/origin ./sandbox/working
+
+    # Run the MCP inspector
+    inspect-mcp:
+      expressions:
+        dir: Path('.')
+      steps:
+        - npx @modelcontextprotocol/inspector -- {{dir}}/.venv/bin/python -m busy --config {{dir}}/sandbox/config.yml mcp

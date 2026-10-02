@@ -1,0 +1,9 @@
+[book]
+authors = ["Francis Potter"]
+language = "en"
+multilingual = false
+src = "docs"
+title = "Busy"
+
+[output.html]
+google-analytics = "G-D5W8EEJ5ZV"

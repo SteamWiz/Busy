@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "busy"
+description = "Escape from overwhelm and stay focused all day"
+authors = ["Steampunk Wizard <busy@steamwiz.io>"]
+license = "MIT"
+readme = "PACKAGE.md"
+version = "7.17.0"
+homepage = 'https://steamwiz.io'
+repository = 'https://github.com/SteamWiz/Busy'
+
+[tool.poetry.dependencies]
+python = "^3.13"
+wizlib = "^4.0.8"
+platformdirs = "^3.10.0"
+reportlab = "^4.0.4"
+pyyaml = "^6.0"
+jinja2 = "^3.1.6"
+
+[tool.poetry.group.dev.dependencies]
+pycodestyle = "^2.11.0"
+autopep8 = "^2.0.4"
+coverage = "^7.3.0"
+pytest = "^9.0.2"
+
+[tool.poetry.scripts]
+busy = "busy:BusyApp.main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:tool.poetry.version"]
+tag_format = "v{version}"
+build_command = ""
+
+[tool.semantic_release.branches.main]
+match = "main"
+prerelease = false
+
+[tool.semantic_release.remote.token]
+env = "GH_TOKEN"
+
+[tool.semantic_release.publish]
+upload_to_vcs_release = false

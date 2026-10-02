@@ -1,0 +1,27 @@
+# Common Python stuff
+.eggs/
+__pycache__/
+*.pyc
+.idea/
+.coverage
+*,cover
+htmlcov/
+coverage.xml
+build/
+*.egg-info/
+dist/
+.DS_Store
+*.zip
+.env
+/.venv/
+/book/
+
+# Files I use locally to test ideas
+delete-me.*
+sandbox/working/
+
+# Emacs temp files
+.#*
+
+# An experiment in caching for GitLab data
+.glie

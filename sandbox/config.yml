@@ -1,0 +1,10 @@
+busy:
+  storage:
+    directory: ./sandbox/working
+  queues:
+    tasks:
+      tags:
+        foo:
+          tags:
+            bar:
+            zing: False
