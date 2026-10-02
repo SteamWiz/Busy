@@ -19,10 +19,3 @@ dyngle:
     sandbox:
       - rm -rf ./sandbox/working
       - cp -r ./sandbox/origin ./sandbox/working
-
-    # Run the MCP inspector
-    inspect-mcp:
-      expressions:
-        dir: Path('.')
-      steps:
-        - npx @modelcontextprotocol/inspector -- {{dir}}/.venv/bin/python -m busy --config {{dir}}/sandbox/config.yml mcp
