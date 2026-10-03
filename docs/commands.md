@@ -39,6 +39,7 @@ Commands that make changes:
 - `--defer` applies to the `done` command
 - `--fields` and `--unique` apply to the `view` command
 - `--add-tag` applies to the `update` command (may be specified multiple times)
+- `--remove-tag` applies to the `update` command (may be specified multiple times)
 - `--set-val` applies to the `update` command (may be specified multiple times)
 
 ## Default item designations

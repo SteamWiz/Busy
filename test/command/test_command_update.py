@@ -68,6 +68,55 @@ class TestCommandUpdate(BusyTestCase):
         self.assertIn('x', tc[0].tags)
         self.assertNotIn('x', tc[1].tags)
 
+    def test_remove_tag_from_one_item(self):
+        o = TodoCollection([
+            Item.from_markup('a #x'),
+            Item.from_markup('b #x'),
+        ])
+        a = Mock()
+        a.storage.get_collection.return_value = o
+        c = UpdateCommand(a, filter=[1], remove_tags=['x'])
+        c.execute()
+        self.assertNotIn('x', o[0].tags)
+        self.assertIn('x', o[1].tags)
+        self.assertTrue(o.changed)
+
+    def test_remove_tag_not_present(self):
+        o = TodoCollection([Item.from_markup('a')])
+        a = Mock()
+        a.storage.get_collection.return_value = o
+        c = UpdateCommand(a, filter=[1], remove_tags=['x'])
+        c.execute()
+        self.assertNotIn('x', o[0].tags)
+        self.assertTrue(o.changed)
+
+    def test_remove_tag_from_filtered_items(self):
+        o = TodoCollection([
+            Item.from_markup('a #p #x'),
+            Item.from_markup('b #x'),
+            Item.from_markup('c #p #x'),
+        ])
+        a = Mock()
+        a.storage.get_collection.return_value = o
+        c = UpdateCommand(a, filter=['p'], remove_tags=['x'])
+        c.execute()
+        self.assertNotIn('x', o[0].tags)
+        self.assertIn('x', o[1].tags)
+        self.assertNotIn('x', o[2].tags)
+        self.assertTrue(o.changed)
+
+    def test_from_app_remove_tag(self):
+        tc = TodoCollection([
+            Item.from_markup('a #x'),
+            Item.from_markup('b #x'),
+        ])
+        a = BusyApp()
+        a.storage = self.mock_storage(tc, Mock())
+        with self.patchout(), self.patcherr():
+            a.parse_run('update', '--remove-tag', 'x', '1')
+        self.assertNotIn('x', tc[0].tags)
+        self.assertIn('x', tc[1].tags)
+
     def test_set_val_on_one_item(self):
         o = TodoCollection([
             Item.from_markup('a'),
