@@ -2,6 +2,25 @@
 
 <!-- version list -->
 
+## v8.1.0 (2026-10-03)
+
+### Continuous Integration
+
+- Name the pull-request workflow 'PR Checks'
+  ([`d57eca9`](https://github.com/SteamWiz/Busy/commit/d57eca9974475bd4eb6efdc92cc71bb99611f244))
+
+- Reference steamwiz/actions@v1
+  ([`6ea339b`](https://github.com/SteamWiz/Busy/commit/6ea339be3414ba989ed10f67f1582967c12cd6ce))
+
+- Split PR checks from release; read-only PR token, one run per PR
+  ([`dffc371`](https://github.com/SteamWiz/Busy/commit/dffc371a5cd3ff9a9fed568854dd14cf5139e684))
+
+### Features
+
+- Add --remove-tag option to update command ([#24](https://github.com/SteamWiz/Busy/pull/24),
+  [`4483238`](https://github.com/SteamWiz/Busy/commit/4483238bcaed563d7b9fb85ef29af9edc739fcaa))
+
+
 ## v8.0.0 (2026-10-02)
 
 ### Chores

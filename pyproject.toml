@@ -4,7 +4,7 @@ description = "Escape from overwhelm and stay focused all day"
 authors = ["Steampunk Wizard <busy@steamwiz.io>"]
 license = "MIT"
 readme = "PACKAGE.md"
-version = "8.0.0"
+version = "8.1.0"
 homepage = 'https://steamwiz.io'
 repository = 'https://github.com/SteamWiz/Busy'
 
