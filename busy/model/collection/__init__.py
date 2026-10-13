@@ -5,6 +5,7 @@ from collections.abc import Iterable
 from csv import DictReader, DictWriter
 from io import IOBase
 
+from busy.error import BusyError
 from busy.model.item import Item
 from wizlib.class_family import ClassFamily
 from busy.util.identifier import Identifier
@@ -181,6 +182,13 @@ class SingleStateCollection(Collection):
         changed = False
         for row in reader:
             item = Item.from_markup(state=self.state, **row)
+            # Reject invalid plan dates on edit (but not on load, so that
+            # existing bad data can still be loaded and fixed).
+            if not from_storage and 'plan_date' in self.schema \
+                    and item.plan_date is None:
+                raise BusyError(
+                    f"Invalid date '{row.get('plan_date')}' "
+                    f"for item '{row.get('markup')}'")
             if identifier and not item.id:
                 item.id = identifier.increment()
                 changed = True
