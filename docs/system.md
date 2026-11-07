@@ -59,7 +59,21 @@ busy:
 
 For tag-specific configuration including access control and hierarchical tag relationships, see [Tag configuration](tag-configuration.md).
 
-Note that Busy does not support concurrency or locking in any form. If two commands are executing at the same time, they might overwrite each other. Overwriting is especially risky with the `edit` and `manage` commands, which keeps the user's editor open until they close it.
+### Locking and concurrent commands
+
+So that two Busy commands running at the same time (for example, a `busy add` run in the background by another tool while you work with Busy interactively) can't overwrite each other's changes, each command takes an exclusive lock on a `.lock` file in the storage directory before it reads any collection, and releases it after saving (or when the command ends for any other reason).
+
+If another Busy command already holds the lock, the new command waits for it. If it can't get the lock within the timeout (5 seconds by default), it stops with a `BusyError` naming the lock file and exits with a non-zero status, without reading or changing any data. Run it again once the other command has finished. The timeout, in seconds, is configurable:
+
+```yaml
+busy:
+  lock:
+    timeout: 10
+```
+
+The `edit` and `manage` commands hold the lock for the whole editing session, from loading the items until the editor closes and the changes are saved. While an editor is open, any other Busy command, including background ones, times out with the error described above.
+
+The lock only covers Busy commands. Editing the data files directly while Busy is running is not protected.
 
 The format is designed to be simple but not idiot-proof. Experimentation might result in unintended consequences.
 
